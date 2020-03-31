@@ -3,6 +3,8 @@ import { Route, Switch } from 'react-router-dom';
 import SignUpLogin from './pages/signUpLogin/signUpLogin';
 import Login from './components/Login/Login'
 import Header from './components/Header/Header';
+import ForgetPassword from './pages/ForgetPassword/ForgetPassword';
+import Feed from './pages/Feed/Feed';
 import './App.css';
 
 function App() {
@@ -10,7 +12,9 @@ function App() {
     <React.Fragment>
       <Header></Header>
       <Switch>
-      <Route path ='/login' exact  component ={Login} />
+      <Route path ='/login'   component ={Login} />
+      <Route path ='/forget-password'  component ={ForgetPassword} />
+      <Route path ='/feed'  component ={Feed} />
       <Route path ='/' exact component ={SignUpLogin} />
       
       </Switch>

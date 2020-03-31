@@ -4,6 +4,14 @@
     padding: 150px 0 0 100px;
     width: 50%;
     margin: 0 auto;
+
+    .forgetPassword{
+        display: flex;
+    justify-content: flex-end;
+    flex-basis: 1%;
+    width: 81%;
+    margin: 15px 0;
+    }
 }
 .loginBtn{
     display: flex;
