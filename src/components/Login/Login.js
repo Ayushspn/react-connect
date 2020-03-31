@@ -35,12 +35,14 @@ const Login = () => {
 
     const btnSubmit =  () => {
         setvalidationOnSubmitForm(true);
-        defaultAuth.signInWithEmailAndPassword(userName, userPassword).then((res) => {
-            console.log('res', res);
-        })
-        .catch((err) =>{
-            console.log('err', err);
-        });
+        if(validationFormFlag){
+            defaultAuth.signInWithEmailAndPassword(userName, userPassword).then((res) => {
+                console.log('res', res);
+            })
+            .catch((err) =>{
+                console.log('err', err);
+            });
+        }
         
     }
     return (<form className={classes.loginForm}>
