@@ -5,7 +5,7 @@ import classes from './SignUp.module.scss';
 import { defaultAuth } from '../../firebase';
 
 const SignUp = () => {
-
+    const errMssg = [classes.errorMessage, classes.mrgnTop].join(' ');
     const [userName, setUserName] = useState('');
     const [userPassword, setUserPassword] = useState('');
     const [userConfirmPassword, setUserConfirmPassword] = useState('');
@@ -85,7 +85,7 @@ const SignUp = () => {
     const btnSubmit = () => {
         setvalidationOnSubmitForm(true);
         if (validationFormFlag) {
-            defaultAuth.signInWithEmailAndPassword(userName, userPassword).then((res) => {
+            defaultAuth.createUserWithEmailAndPassword(userName, userPassword).then((res) => {
                 console.log('res', res);
             })
                 .catch((err) => {
@@ -97,25 +97,26 @@ const SignUp = () => {
     }
     return (
         <>
-            {validatingComparePassword && validationOnSubmitForm ? <p>password and confirm password do not match</p> : null}
+            
             <form className={classes.loginForm}>
+            {validatingComparePassword && validationOnSubmitForm ? <p className = {errMssg}>password and confirm password do not match</p> : null}
                 <Input inputType='text' inputLabel='User Name' inputWidth='80%' inputValue={userName}
                     onInputChange={(event) => onUserNameChange(event)} 
                     onPasswordKeyUP={(event) => onUserNameUP(event)}
                     />
-                {validatioUserName && validationOnSubmitForm ? <p>please enter valid username </p> : null}
+                {validatioUserName && validationOnSubmitForm ? <p className = {classes.errorMessage}>please enter valid username </p> : null}
                 <Input inputType='password' inputLabel='Password' inputWidth='80%'
                     inputValue={userPassword}
                     onInputChange={(event) => onPasswordChange(event)}
                     onPasswordKeyUP={(event) => onPasswordKeyUP(event)}
                 />
-                {validatioPassword && validationOnSubmitForm ? <p>please enter password  </p> : null}
+                {!userPassword && validationOnSubmitForm ? <p className = {classes.errorMessage}>please enter password  </p> : null}
                 <Input inputType='password' inputLabel='Confirm Password' inputWidth='80%'
                     inputValue={userConfirmPassword}
                     onInputChange={(event) => onConfirmPasswordChange(event)}
                     onPasswordKeyUP={(event) => onPasswordKeyUP(event)}
                 />
-                {validatioConfirmPassword && validationOnSubmitForm ? <p>please enter confirm  password  </p> : null}
+                {!userConfirmPassword && validationOnSubmitForm ? <p className = {classes.errorMessage}>please enter confirm  password  </p> : null}
                 <div className={classes.loginBtn}>
                     <CustomButton type='submit' color='primary' loginFormSubmit={() => btnSubmit()}>Ok</CustomButton>
                     <CustomButton type='button' color='secondary'>Cancel</CustomButton>
