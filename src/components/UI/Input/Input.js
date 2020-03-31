@@ -1,7 +1,7 @@
 import React from 'react';
 import TextField from '@material-ui/core/textfield';
 
-const Input = ({ inputType, inputLabel, inputWidth, inputValue , onInputChange}) => {
+const Input = ({ inputType, inputLabel, inputWidth, inputValue , onInputChange, onPasswordKeyUP}) => {
     switch (inputType) {
         case 'text':
             return (
@@ -9,6 +9,7 @@ const Input = ({ inputType, inputLabel, inputWidth, inputValue , onInputChange})
                 <TextField  label={inputLabel}  style = {{'width' : inputWidth}} 
                 value = {inputValue}
                 onChange = {(event) => onInputChange(event)}
+                onKeyUp = {(event) => onPasswordKeyUP(event)}
                 />
                 </div>
             )
@@ -19,6 +20,7 @@ const Input = ({ inputType, inputLabel, inputWidth, inputValue , onInputChange})
                 <TextField label={inputLabel} type="password" style = {{'width' : inputWidth}}
                  value = {inputValue}
                 onChange = {(event) => onInputChange(event)}
+                onKeyUp = {(event) => onPasswordKeyUP(event)}
                 />
                 </div>
             )
