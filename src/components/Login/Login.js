@@ -4,8 +4,9 @@ import CustomButton from '../UI/Input/Button/Button';
 import classes from './Login.module.scss';
 import { Link } from 'react-router-dom';
 import { defaultAuth } from '../../firebase';
-
-const Login = ({history}) => {
+import {connect} from 'react-redux';
+import {onLoggedInUser} from '../../redux/userdetails/user.action.creator';
+const Login = ({history, userLoggedIn}) => {
 
     const [userName, setUserName] = useState('');
     const [userPassword, setUserPassword] = useState('');
@@ -54,6 +55,7 @@ const Login = ({history}) => {
         if (validationFormFlag) {
             defaultAuth.signInWithEmailAndPassword(userName, userPassword).then((res) => {
                 if (res) {
+                    userLoggedIn()
                     history.push('/feed');
                 }
             })
@@ -85,4 +87,9 @@ const Login = ({history}) => {
     </form>)
 }
 
-export default Login;
+const mapDispatchToProps = dispatch => {
+    return {
+        userLoggedIn : () => dispatch(onLoggedInUser())
+    }
+}
+export default connect(null, mapDispatchToProps)(Login);
