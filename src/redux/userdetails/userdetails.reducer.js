@@ -5,8 +5,7 @@ const INITIAL_STATE = {
 }
 
 const userDetailsReducer = (state = INITIAL_STATE, action) => {
-    debugger
-    switch (action.type) {
+        switch (action.type) {
         
         case userLoggedIn:
             return {

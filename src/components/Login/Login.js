@@ -4,9 +4,10 @@ import CustomButton from '../UI/Input/Button/Button';
 import classes from './Login.module.scss';
 import { Link } from 'react-router-dom';
 import { defaultAuth } from '../../firebase';
-import {connect} from 'react-redux';
-import {onLoggedInUser} from '../../redux/userdetails/user.action.creator';
-const Login = ({history, userLoggedIn}) => {
+import { connect } from 'react-redux';
+import { onLoggedInUser } from '../../redux/userdetails/user.action.creator';
+import { firebaseStore } from '../../firebase';
+const Login = ({ history, userLoggedIn }) => {
 
     const [userName, setUserName] = useState('');
     const [userPassword, setUserPassword] = useState('');
@@ -55,7 +56,24 @@ const Login = ({history, userLoggedIn}) => {
         if (validationFormFlag) {
             defaultAuth.signInWithEmailAndPassword(userName, userPassword).then((res) => {
                 if (res) {
-                    userLoggedIn()
+                    console.log(res)
+                    userLoggedIn();
+                    const userCollection = firebaseStore.collection("User").get()
+                        .then(function (querySnapshot) {
+                            querySnapshot.forEach(function (doc) {
+                                if(doc.id === res.uid){
+                                   history.push('/feed');
+                                }
+                                else {
+                                    history.push('/profile');
+                                }   
+                            });
+                        })
+                        .catch(function (error) {
+                            console.log("Error getting documents: ", error);
+                        });
+
+
                     history.push('/feed');
                 }
             })
@@ -89,7 +107,7 @@ const Login = ({history, userLoggedIn}) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        userLoggedIn : () => dispatch(onLoggedInUser())
+        userLoggedIn: () => dispatch(onLoggedInUser())
     }
 }
 export default connect(null, mapDispatchToProps)(Login);
