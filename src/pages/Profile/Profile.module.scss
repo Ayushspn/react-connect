@@ -1,0 +1,15 @@
+@import '../../style/colors.scss';
+
+.profileForm {width: 33rem;
+z-index: 2;
+background: white;
+margin: 0 auto;
+padding: 25px;
+.profileIcon{
+    height: 100px ;
+    width: 100px;
+    border-radius: 50%;
+    background-color: $headerBackground;
+    margin: 0 auto;
+}
+}
