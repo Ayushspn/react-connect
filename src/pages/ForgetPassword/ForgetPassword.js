@@ -12,7 +12,6 @@ const ForgetPassword = () => {
     const onUserNameChange = (event) => {
         if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(event.target.value)) {
             setValidationUserNmae(false);
-            console.log(validatioUserName)
 
         }
         else {
@@ -30,7 +29,6 @@ const ForgetPassword = () => {
     const btnSubmit = () => {
         setvalidationOnSubmitForm(true);
         if (!validatioUserName) {
-            console.log(userName)
             defaultAuth.sendPasswordResetEmail(userName).then(function() {
                 console.log('mail sent');
               }).catch(function(error) {

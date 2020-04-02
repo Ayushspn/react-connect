@@ -3,8 +3,13 @@ import {firebaseStore} from '../../firebase';
 
 export const  onProfileUpdate = (userdetails) => {
    return (dispatch, getState) => {
-    firebaseStore.collection("User").add(
-        userdetails
+       const {userId} = getState().user;
+       const userDetails = {
+           ...userdetails, 
+           userId
+       }
+    firebaseStore.collection("User").doc(userId).set(
+        userDetails
     ).then((res) => {
         console.log(res);
     })

@@ -57,11 +57,11 @@ const Login = ({ history, userLoggedIn }) => {
             defaultAuth.signInWithEmailAndPassword(userName, userPassword).then((res) => {
                 if (res) {
                     console.log(res)
-                    userLoggedIn();
+                    userLoggedIn(res.user.uid);
                     const userCollection = firebaseStore.collection("User").get()
                         .then(function (querySnapshot) {
                             querySnapshot.forEach(function (doc) {
-                                if(doc.id === res.uid){
+                                if(doc.id=== res.user.uid){
                                    history.push('/feed');
                                 }
                                 else {
@@ -107,7 +107,7 @@ const Login = ({ history, userLoggedIn }) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        userLoggedIn: () => dispatch(onLoggedInUser())
+        userLoggedIn: (userId) => dispatch(onLoggedInUser(userId))
     }
 }
 export default connect(null, mapDispatchToProps)(Login);

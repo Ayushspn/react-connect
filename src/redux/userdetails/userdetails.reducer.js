@@ -1,7 +1,8 @@
 import {userLoggedIn} from './userdetails.action';
 
 const INITIAL_STATE = {
-    loggedInUser: false
+    loggedInUser: false,
+    userId : ''
 }
 
 const userDetailsReducer = (state = INITIAL_STATE, action) => {
@@ -10,7 +11,8 @@ const userDetailsReducer = (state = INITIAL_STATE, action) => {
         case userLoggedIn:
             return {
                 ...state,
-                loggedInUser: true
+                loggedInUser: true, 
+                userId : action.payload
 
             }
         default:

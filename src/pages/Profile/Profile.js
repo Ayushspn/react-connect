@@ -70,7 +70,6 @@ const Profile = ({profiledetails}) => {
     const handleSubmit = (event) => {
         event.preventDefault()
         setprofileFormsubmission(true);
-        console.log(name, phoneNumber, address, profession, imageUrl);
         profiledetails({
             name, 
             phoneNumber, 
