@@ -11,6 +11,8 @@ import { fireStorage } from '../../firebase';
 
 import {onProfileUpdate} from '../../redux/profile/profile.actions.creator';
 import { connect } from 'react-redux';
+
+
 const Profile = ({profiledetails}) => {
     const [uploadStart, setUploadStart] = useState(false);
     const [uploadError, setUploadError] = useState(false);

@@ -1,17 +1,22 @@
-import {updateProfileDetails} from './profile.actions';
+import { updateProfileDetails, getProfiledetails } from './profile.actions';
 
 const INITIAL_STATE = {
-    userDetails: {}
+    userDetails: {}, 
+    getUserDetails : {}
 }
 
 const profileReducer = (state = INITIAL_STATE, action) => {
-    
-        switch (action.type) {
+    switch (action.type) {
         case updateProfileDetails:
-            console.log(action.payload)
             return {
                 ...state,
-                userDetails:  action.payload
+                userDetails: action.payload
+
+            }
+        case getProfiledetails:
+            return {
+                ...state,
+                getUser: action.payload
 
             }
         default:
