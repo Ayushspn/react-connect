@@ -12,4 +12,16 @@ padding: 25px;
     background-color: $headerBackground;
     margin: 0 auto;
 }
+.profileBtn{
+    margin-top: 20px;
+    
+}
+.submitBtn{
+    margin-left: 15pxx;
+}
+.errorMessage {
+    color: #D8000C;
+    background-color: #FFD2D2;
+    width: 50%;
+}
 }
