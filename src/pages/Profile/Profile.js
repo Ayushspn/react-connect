@@ -145,7 +145,7 @@ const Profile = ({profiledetails}) => {
     )
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch, getState) => {
     return {
         profiledetails : (userDetails) => dispatch(onProfileUpdate(userDetails))
     }

@@ -5,13 +5,13 @@ import './index.css';
 import App from './App';
 
 import * as serviceWorker from './serviceWorker';
-
-import { createStore } from 'redux'
+import thunk from 'redux-thunk';
+import { createStore, applyMiddleware  } from 'redux'
 import { Provider } from 'react-redux';
 
 import combinedRducer from './redux/store';
 
- const  store = createStore(combinedRducer);
+ const  store = createStore(combinedRducer, applyMiddleware(thunk));
 
 ReactDOM.render(
 
