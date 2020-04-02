@@ -8,7 +8,10 @@ import { faCamera } from '@fortawesome/free-solid-svg-icons'
 import classes from './Profile.module.scss';
 import FileUploader from "react-firebase-file-uploader";
 import { fireStorage } from '../../firebase';
-const Profile = () => {
+
+import {onProfileUpdate} from '../../redux/profile/profile.actions.creator';
+import { connect } from 'react-redux';
+const Profile = ({profiledetails}) => {
     const [uploadStart, setUploadStart] = useState(false);
     const [uploadError, setUploadError] = useState(false);
     const [uploadSuccess, setUploadSuccess] = useState(false);
@@ -67,7 +70,14 @@ const Profile = () => {
     const handleSubmit = (event) => {
         event.preventDefault()
         setprofileFormsubmission(true);
-        console.log(name, phoneNumber, address, profession, imageUrl)
+        console.log(name, phoneNumber, address, profession, imageUrl);
+        profiledetails({
+            name, 
+            phoneNumber, 
+            address, 
+            profession, 
+            imageUrl
+        })
         
     }
     return (
@@ -135,4 +145,10 @@ const Profile = () => {
     )
 }
 
-export default Profile;
+const mapDispatchToProps = dispatch => {
+    return {
+        profiledetails : (userDetails) => dispatch(onProfileUpdate(userDetails))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(Profile);
