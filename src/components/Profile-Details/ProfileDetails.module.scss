@@ -1,0 +1,9 @@
+@import '../../style/colors.scss';
+.profileContainer{
+    min-width: 20rem;
+}
+.userDetails{
+    color : $headerBackground;
+    font-size: large;
+    margin-top: 10px;
+}
