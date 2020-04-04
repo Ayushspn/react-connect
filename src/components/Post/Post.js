@@ -14,8 +14,8 @@ const Post = ({savePostData}) => {
     const [richTextValue, setRichTextValue] = useState('');
 
      const postContent = () => {
-        console.log(richTextValue);
         savePostData(richTextValue)
+        setRichTextValue('')
     }
     return (
         <div className = {classes.postContainer}>
@@ -26,8 +26,19 @@ const Post = ({savePostData}) => {
             value = {richTextValue}
             onChange = {(event) => setRichTextValue(event.target.value)}
                 />
-            <Button type = 'submit' variant="outlined" color='primary' onClick = {() => postContent()}>Post</Button>
-            <Button type = 'button' variant="outlined" color='secondary'>Cancel</Button>
+            <Button 
+            type = 'submit' variant="outlined" color='primary' 
+            onClick = {() => postContent()}
+            disabled = {!richTextValue}
+            >Post</Button
+             
+            >
+            <Button 
+            type = 'button' 
+            variant="outlined" 
+            color='secondary' 
+            disabled = {!richTextValue}
+            onClick = {() => setRichTextValue('')}>Cancel</Button>
         </div>
     )
 }

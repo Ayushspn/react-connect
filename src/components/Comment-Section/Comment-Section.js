@@ -3,6 +3,7 @@ import Comment from './Comment/Comment';
 
 import {getAllCommentsAsync} from '../../redux/CommentSection/Comment.actions.creator';
 import {connect} from 'react-redux';
+import classes from './CommentSection.module.scss';
 const CommentSection = ({getAllPost, commentsByUser}) => {
 
     useEffect(() =>{
@@ -12,7 +13,7 @@ const CommentSection = ({getAllPost, commentsByUser}) => {
         <div>
            {commentsByUser && commentsByUser.length > 0 ? commentsByUser.map((signleCommentByUser) => {
                return (<Comment {...signleCommentByUser}></Comment>)
-           }) : null} 
+           }) : <div className = {classes.noPost}>No Post From You</div>} 
             </div>
     )
 }
