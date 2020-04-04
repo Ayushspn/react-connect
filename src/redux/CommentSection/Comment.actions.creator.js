@@ -2,17 +2,27 @@ import * as commentActions from './Comment.actions';
 
 import {firebaseStore} from '../../firebase';
 
-export const getAllComments = () => {
+export const getAllCommentsAsync = () => {
     const uid = localStorage.getItem('userDeatailsObj'); 
-    return ( dispatch) =>{ 
+    let  commentsByUser = []
+    return ( dispatch) =>{
         firebaseStore.collection('post').doc(uid)
         .collection('userPost')
         .get()
         .then(querySnapshot => {
             querySnapshot.forEach(doc => {
-                console.log(doc.id, " => ", doc.data());
+               commentsByUser.push(doc.data());
             });
+            dispatch(getAllComments(commentsByUser))
         })
         .catch((err) => console.log(err))
+    }
+}
+
+
+export const getAllComments = (allComments) => {
+    return {
+        type : commentActions.getAllComments,
+        payload : allComments
     }
 }
