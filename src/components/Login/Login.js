@@ -58,6 +58,7 @@ const Login = ({ history, userLoggedIn }) => {
                 if (res) {
                     console.log(res)
                     userLoggedIn(res.user.uid);
+                    localStorage.setItem('userDeatailsObj' , res.user.uid)
                     const userCollection = firebaseStore.collection("User").get()
                         .then(function (querySnapshot) {
                             querySnapshot.forEach(function (doc) {
