@@ -13,7 +13,7 @@ const ProfileDetails = ({ getUserDetails, getUser }) => {
     }, [])
 
     useEffect(() => {
-        console.log(getUser)
+       // console.log(getUser)
     }, [getUser])
     return (
         <div className ={classes.profileContainer}>

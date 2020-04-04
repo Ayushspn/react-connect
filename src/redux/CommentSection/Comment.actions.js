@@ -1,0 +1,1 @@
+export const getAllComments = 'GET_ALL_COMMENTS';
