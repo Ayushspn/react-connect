@@ -8,14 +8,12 @@ export const getAllCommentsAsync = () => {
     return ( dispatch) =>{
         firebaseStore.collection('post').doc(uid)
         .collection('userPost')
-        .get()
-        .then(querySnapshot => {
-            querySnapshot.forEach(doc => {
-               commentsByUser.push(doc.data());
+        .onSnapshot(function(querySnapshot) {
+            querySnapshot.forEach(function(doc) {
+                commentsByUser.push(doc.data());
             });
             dispatch(getAllComments(commentsByUser))
-        })
-        .catch((err) => console.log(err))
+        });
     }
 }
 

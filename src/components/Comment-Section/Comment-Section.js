@@ -7,12 +7,7 @@ const CommentSection = ({getAllPost, commentsByUser}) => {
 
     useEffect(() =>{
         getAllPost()
-    }, [])
-
-    useEffect((
-    ) =>{
-    }, [commentsByUser])
-
+    }, [commentsByUser.length])
     return(
         <div>
            {commentsByUser && commentsByUser.length > 0 ? commentsByUser.map((signleCommentByUser) => {
