@@ -1,4 +1,4 @@
-import { getFriends } from './Friends.actions';
+import { getFriends, getFilteredFriends } from './Friends.actions';
 import { firebaseStore} from '../../firebase';
 
 export const onGetFriendsListAsync = () => {
@@ -18,6 +18,14 @@ export const onGetFriendsListAsync = () => {
 const  getFriendsList = (friendsList) => {
     return {
         type : getFriends,
+        payload : friendsList
+    }
+}
+
+
+export const  getFilteredFriendsList = (friendsList) => {
+    return {
+        type : getFilteredFriends,
         payload : friendsList
     }
 }

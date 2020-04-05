@@ -4,11 +4,20 @@
     margin: 10px 14px;
     padding: 32px;
     background-color: #e5e3e3;
+    &:hover{
+        cursor: pointer;
+        background-color: $headerBackground;
+        opacity: .5;
+        color : $white;
+    }
 }
 .userDetails{
     color : $headerBackground;
     font-size: large;
     margin-top: 10px 0 50px 0;
+    &:hover{
+        color : $white;
+    }
 }
 
 .friendList {

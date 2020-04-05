@@ -1,6 +1,8 @@
 import React from 'react';
 import Friend from './Friend/Friend';
 import classes from './FriendList.module.scss';
+
+import  {connect} from 'react-redux';
 const FriendList = ({friendsList}) => {
     let i = 0;
     const friendList = friendsList && friendsList.map((friend) =>{
@@ -10,9 +12,13 @@ const FriendList = ({friendsList}) => {
         )
     })
     return (
-        <div className = {classes.friendList}> {(friendList && friendList.length) > 0 ? <div className = {classes.friendList}>{friendList}</div> : null}</div>
+        <div className = {classes.friendList}> {(friendList && friendList.length) > 0 ? <div className = {classes.friendList}>{friendList}</div> : <div>No Result Found</div>}</div>
     )
 }
+const mapstateToProp = (state) => {
+    return {
+        friendsList  : state.friends.filteredFreindList
+    }
+}
 
-
-export default FriendList;
+export default connect(mapstateToProp)(FriendList);

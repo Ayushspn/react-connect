@@ -1,7 +1,8 @@
-import { getFriends } from './Friends.actions';
+import { getFriends, getFilteredFriends } from './Friends.actions';
 
 const INITIAL_STATE = {
-    friendsList : []
+    friendsList: [], 
+    filteredFreindList : []
 }
 
 const FriendsReducer = (state = INITIAL_STATE, action) => {
@@ -12,7 +13,13 @@ const FriendsReducer = (state = INITIAL_STATE, action) => {
                 friendsList: action.payload
 
             }
-        
+        case getFilteredFriends:
+            return {
+                ...state,
+                filteredFreindList: action.payload
+
+            }
+
         default:
             return state
     }
