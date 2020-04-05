@@ -14,7 +14,7 @@ const Freinds = ({getFriendsList, friends}) => {
     useEffect(() => {
     }, [friends.length])
     return (<div className = {classes.friendsListContainer}><SearchBox></SearchBox>
-    <FriendList friendsList = {friends}></FriendList>
+    <div className = {classes.friendsContainer}><FriendList friendsList = {friends}></FriendList></div>
     </div>)
 }
 

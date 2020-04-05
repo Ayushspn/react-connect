@@ -1,9 +1,16 @@
 @import '../../../style/colors.scss';
 .profileContainer{
     min-width: 11rem;
+    margin: 10px 14px;
+    padding: 32px;
+    background-color: #e5e3e3;
 }
 .userDetails{
     color : $headerBackground;
     font-size: large;
     margin-top: 10px 0 50px 0;
+}
+
+.friendList {
+    display: flex;
 }

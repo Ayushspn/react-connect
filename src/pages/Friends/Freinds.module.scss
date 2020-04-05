@@ -2,4 +2,8 @@
     max-width: 50rem;
     margin : 0 auto;
     background: #fafafa;
+    min-height: 100vh;
+    .friendsContainer {
+        display: flex;
+    }
 }
