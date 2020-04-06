@@ -9,14 +9,27 @@ export const onProfileUpdate = (userdetails) => {
             ...userdetails,
             userId
         }
+        const userPorofile = JSON.parse(localStorage.getItem('userProfile'));
+        if (userPorofile) {
+            firebaseStore.collection("User").doc(userId).update(
+                userDetails
+            ).then((res) => {
+                console.log(res);
+            })
+             .catch((err) => {
+                    console.log(err)
+             })
+             return
+        }
         firebaseStore.collection("User").doc(userId).set(
             userDetails
         ).then((res) => {
             console.log(res);
         })
-            .catch((err) => {
+         .catch((err) => {
                 console.log(err)
-            })
+         })
+
     }
 }
 
@@ -29,7 +42,7 @@ export const onProfileUpdateAsync = (userdetails) => {
 
 export const getProfileDetailsAsycn = () => {
     return (dispatch) => {
-        const {uid} = JSON.parse(localStorage.getItem('userDeatailsObj'))
+        const { uid } = JSON.parse(localStorage.getItem('userDeatailsObj'))
         var docRef = firebaseStore.collection("User").doc(uid);
         docRef.get().then(function (doc) {
             if (doc.exists) {
@@ -47,7 +60,7 @@ export const getProfileDetailsAsycn = () => {
 
 export const getProfileData = (userDetails) => {
     return {
-        type : profileActions.getProfiledetails,
-        payload : userDetails
+        type: profileActions.getProfiledetails,
+        payload: userDetails
     }
 }

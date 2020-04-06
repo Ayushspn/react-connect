@@ -7,10 +7,12 @@
 
     .forgetPassword{
         display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
+    flex-direction: column;
     flex-basis: 1%;
     width: 81%;
     margin: 15px 0;
+    align-items: flex-end;
     }
 }
 .loginBtn{

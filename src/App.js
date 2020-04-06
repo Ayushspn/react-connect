@@ -17,13 +17,14 @@ function App({loggedInUser}) {
       <Switch>
       <Route path ='/login'   component ={Login} />
       <Route path ='/forget-password'  component ={ForgetPassword} />
+      <Route path ='/' exact component ={SignUpLogin} />
       {loggedInUser ?
       <>
       <Route path ='/forget-password'  component ={ForgetPassword} />
       <Route path ='/feed'  component ={Feed} />
       <Route path ='/profile'  component ={Profile} />
       <Route path ='/find-friends'  component ={Friends} />
-      <Route path ='/' exact component ={SignUpLogin} />
+      
       </>
       :<Redirect to ='/login'/>
       }

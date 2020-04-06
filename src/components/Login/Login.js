@@ -71,9 +71,7 @@ const Login = ({ history, userLoggedIn }) => {
                         .catch(function (error) {
                             console.log("Error getting documents: ", error);
                         });
-
-
-                    //history.push('/feed');
+                    
                 }
             })
                 .catch((err) => {
@@ -101,7 +99,8 @@ const Login = ({ history, userLoggedIn }) => {
         />
         {!userPassword && validationOnSubmitForm ? <p className={classes.errorMessage}>please enter password  </p> : null}
         <div className={classes.forgetPassword}>
-            <Link to='/forget-password'>Forget Password ?</Link>
+        <div><Link to='/forget-password'>Forget Password ?</Link></div>
+            <div>Don't have account ? <Link to='/'>create it</Link></div>
         </div>
         <div className={classes.loginBtn}>
             <div style = {{'marginRight': '20px', 

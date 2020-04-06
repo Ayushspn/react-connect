@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { defaultAuth } from '../../firebase';
 import { onLoggedInUser } from '../../redux/userdetails/user.action.creator';
 const Header = ({ loggedInUser, history, userLoggedIn }) => {
-    let path = '/';
+    let path = '/login';
     if (loggedInUser) {
         path = '/feed';
     }
