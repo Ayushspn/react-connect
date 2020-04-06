@@ -3,8 +3,11 @@ import Input from '../UI/Input/Input';
 import CustomButton from '../UI/Input/Button/Button';
 import classes from './SignUp.module.scss';
 import { defaultAuth } from '../../firebase';
+import {withRouter} from 'react-router';
 
-const SignUp = () => {
+import {useToasts } from 'react-toast-notifications'
+
+const SignUp = ({history}) => {
     const errMssg = [classes.errorMessage, classes.mrgnTop].join(' ');
     const [userName, setUserName] = useState('');
     const [userPassword, setUserPassword] = useState('');
@@ -20,7 +23,7 @@ const SignUp = () => {
 
     const [validatingComparePassword, setvalidatingComparePassword] = useState(false); // false on compare password
 
-
+    const {addToast} = useToasts();
 
     const onUserNameChange = (event) => {
         if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(event.target.value)) {
@@ -84,12 +87,17 @@ const SignUp = () => {
 
     const btnSubmit = () => {
         setvalidationOnSubmitForm(true);
-        if (validationFormFlag) {
+        if (userName && !validatioUserName && !validatingComparePassword && userPassword && userConfirmPassword) {
             defaultAuth.createUserWithEmailAndPassword(userName, userPassword).then((res) => {
                 console.log('res', res);
+                if(res) {
+                    addToast('User Added sucessfully', { appearance: 'success' });
+                    history.replace('/login');
+                }
             })
                 .catch((err) => {
-                    console.log('err', err);
+                    addToast(err.message, { appearance: 'error' })
+                    //console.log('err', err);
                 });
         }
 
@@ -125,4 +133,4 @@ const SignUp = () => {
         </>)
 }
 
-export default SignUp;
+export default withRouter(SignUp);

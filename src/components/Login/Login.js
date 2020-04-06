@@ -56,17 +56,17 @@ const Login = ({ history, userLoggedIn }) => {
         if (validationFormFlag) {
             defaultAuth.signInWithEmailAndPassword(userName, userPassword).then((res) => {
                 if (res) {
-                    console.log(res)
+                    const stringfyUser = JSON.stringify(res.user);
                     userLoggedIn(res.user.uid);
-                    localStorage.setItem('userDeatailsObj' , res.user.uid)
+                    localStorage.setItem('userDeatailsObj' , stringfyUser)
                     const userCollection = firebaseStore.collection("User").get()
                         .then(function (querySnapshot) {
                             querySnapshot.forEach(function (doc) {
                                 if(doc.id=== res.user.uid){
-                                   history.push('/feed');
+                                   history.replace('/feed');
                                 }
                                 else {
-                                    history.push('/profile');
+                                    history.replace('/profile');
                                 }   
                             });
                         })
@@ -75,7 +75,7 @@ const Login = ({ history, userLoggedIn }) => {
                         });
 
 
-                    history.push('/feed');
+                    //history.push('/feed');
                 }
             })
                 .catch((err) => {
@@ -83,6 +83,12 @@ const Login = ({ history, userLoggedIn }) => {
                 });
         }
 
+    }
+
+
+    const onCancleClick = () =>{
+        setUserName('');
+        setUserPassword('')
     }
     return (<form className={classes.loginForm}>
 
@@ -100,8 +106,17 @@ const Login = ({ history, userLoggedIn }) => {
             <Link to='/forget-password'>Forget Password ?</Link>
         </div>
         <div className={classes.loginBtn}>
-            <CustomButton type='submit' color='primary' loginFormSubmit={() => btnSubmit()}>Login</CustomButton>
-            <CustomButton type='button' color='secondary'>Cancel</CustomButton>
+            <div style = {{'marginRight': '20px', 
+                'display' : 'inlineBlock'
+                }}>
+            <CustomButton type='submit' color='primary' loginFormSubmit={() => btnSubmit()}
+            >Login</CustomButton>
+            </div>
+            <CustomButton 
+            type='button' 
+            color='secondary'
+            loginFormSubmit={() => onCancleClick()}
+            >Cancel</CustomButton>
         </div>
     </form>)
 }

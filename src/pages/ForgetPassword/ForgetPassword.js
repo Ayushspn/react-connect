@@ -3,7 +3,7 @@ import Input from '../../components/UI/Input/Input';
 import CustomButton from '../../components/UI/Input/Button/Button';
 import classes from './ForgetPassword.module.scss';
 import {defaultAuth} from '../../firebase';
-
+import {useToasts } from 'react-toast-notifications'
 const ForgetPassword = () => {
     const [userName, setUserName] = useState('');
     const [validatioUserName, setValidationUserNmae] = useState(false);
@@ -21,7 +21,7 @@ const ForgetPassword = () => {
 
         setUserName(event.target.value);
     }
-
+    const {addToast} = useToasts();
     const onUserNameUP = () => {
 
     }
@@ -30,9 +30,9 @@ const ForgetPassword = () => {
         setvalidationOnSubmitForm(true);
         if (!validatioUserName) {
             defaultAuth.sendPasswordResetEmail(userName).then(function() {
-                console.log('mail sent');
+                addToast('Mail has been sent, Please check your mail ', { appearance: 'success' });
               }).catch(function(error) {
-                // An error happened.
+                addToast(error.message, { appearance: 'error' });
               });
     }
 }
@@ -42,9 +42,9 @@ const ForgetPassword = () => {
             <Input inputType='text' inputLabel='User Name' inputWidth='80%' inputValue={userName}
                 onInputChange={(event) => onUserNameChange(event)}
                 onPasswordKeyUP={(event) => onUserNameUP(event)} />
-            {(validatioUserName  && validationOnSubmitForm)? <p className={classes.errorMessage}>please enter valid username </p> : null}
+            {((validatioUserName || !userName)  && validationOnSubmitForm)? <p className={classes.errorMessage}>please enter valid username </p> : null}
             <div className={classes.loginBtn}>
-            <CustomButton type='submit' color='primary' loginFormSubmit={() => btnSubmit()}>Login</CustomButton>
+            <CustomButton type='submit' color='primary' loginFormSubmit={() => btnSubmit()}>OK</CustomButton>
             </div>
         </form>
     )

@@ -33,6 +33,7 @@ export const getProfileDetailsAsycn = () => {
         docRef.get().then(function (doc) {
             if (doc.exists) {
                 console.log("Document data:", doc.data());
+                localStorage.setItem('userProfile', JSON.stringify(doc.data()));
                 dispatch(getProfileData(doc.data()))
             } else {
                 console.log("No such document!");

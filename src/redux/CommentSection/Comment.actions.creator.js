@@ -3,7 +3,8 @@ import * as commentActions from './Comment.actions';
 import {firebaseStore} from '../../firebase';
 
 export const getAllCommentsAsync = () => {
-    const uid = localStorage.getItem('userDeatailsObj'); 
+    const stringfyUid = localStorage.getItem('userDeatailsObj'); 
+    const {uid} = JSON.parse(stringfyUid);
     let  commentsByUser = []
     return ( dispatch) =>{
         firebaseStore.collection('post').doc(uid)

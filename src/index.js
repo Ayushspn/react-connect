@@ -6,21 +6,25 @@ import App from './App';
 
 import * as serviceWorker from './serviceWorker';
 import thunk from 'redux-thunk';
-import { createStore, applyMiddleware  } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux';
+
+import { ToastProvider } from 'react-toast-notifications'
 
 import combinedRducer from './redux/store';
 
- const  store = createStore(combinedRducer, applyMiddleware(thunk));
+const store = createStore(combinedRducer, applyMiddleware(thunk));
 
 ReactDOM.render(
 
   <React.StrictMode>
-    <Provider store = {store}>
-      <BrowserRouter>
-        <App  />
-      </BrowserRouter>
-    </Provider>
+    <ToastProvider PlacementType ='top-center'>
+      <Provider store={store}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </Provider>
+    </ToastProvider>
   </React.StrictMode>
   ,
   document.getElementById('root')
