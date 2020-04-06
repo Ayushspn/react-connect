@@ -11,7 +11,7 @@ const Comment = (props) => {
             </div>
             <div className = {classes.postDate}>
                 <span>{props.postByUser}</span>
-                <span style = {{ 'align-self': 'flex-end'}}>{props.createdDate}</span>
+                <span style = {{ 'alignSelf': 'flex-end'}}>{props.createdDate}</span>
             </div>
         </Card>
     )

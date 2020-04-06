@@ -8,23 +8,34 @@ import Feed from './pages/Feed/Feed';
 import Profile from './pages/Profile/Profile';
 import Friends from './pages/Friends/Friends';
 import './App.css';
-
-
-function App() {
+import { connect } from 'react-redux';
+import {Redirect} from 'react-router-dom';
+function App({loggedInUser}) {
   return (
     <React.Fragment>
       <Header></Header>
       <Switch>
       <Route path ='/login'   component ={Login} />
       <Route path ='/forget-password'  component ={ForgetPassword} />
+      {loggedInUser ?
+      <>
+      <Route path ='/forget-password'  component ={ForgetPassword} />
       <Route path ='/feed'  component ={Feed} />
       <Route path ='/profile'  component ={Profile} />
       <Route path ='/find-friends'  component ={Friends} />
       <Route path ='/' exact component ={SignUpLogin} />
-      
+      </>
+      :<Redirect to ='/login'/>
+      }
       </Switch>
     </React.Fragment>
   );
 }
 
-export default App;
+const mapStateToProps = ({ user: { loggedInUser } }) => {
+  return {
+      loggedInUser
+  }
+}
+
+export default connect(mapStateToProps)(App);

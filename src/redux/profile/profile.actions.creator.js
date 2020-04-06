@@ -29,10 +29,10 @@ export const onProfileUpdateAsync = (userdetails) => {
 
 export const getProfileDetailsAsycn = () => {
     return (dispatch) => {
-        var docRef = firebaseStore.collection("User").doc("TdxsHEGLD2cq4NR1sLcnscekegc2");
+        const {uid} = JSON.parse(localStorage.getItem('userDeatailsObj'))
+        var docRef = firebaseStore.collection("User").doc(uid);
         docRef.get().then(function (doc) {
             if (doc.exists) {
-                console.log("Document data:", doc.data());
                 localStorage.setItem('userProfile', JSON.stringify(doc.data()));
                 dispatch(getProfileData(doc.data()))
             } else {

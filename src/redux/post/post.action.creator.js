@@ -4,7 +4,7 @@ import { firebaseStore, firebaseDb } from '../../firebase';
 export const onPostDataAsync = (post) => {
     return (dispatch, getState) => {
         const createdDate = new Date().toLocaleDateString();
-        const uid = localStorage.getItem('userDeatailsObj');
+        const {uid} = JSON.parse(localStorage.getItem('userDeatailsObj'));
         const {name, imageUrl} = getState().profile.getUser; 
         const userPost = {
             'postByUser' : post, 

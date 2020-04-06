@@ -54,21 +54,19 @@ const Login = ({ history, userLoggedIn }) => {
     const btnSubmit = () => {
         setvalidationOnSubmitForm(true);
         if (validationFormFlag) {
+            const userDocIds = [];
             defaultAuth.signInWithEmailAndPassword(userName, userPassword).then((res) => {
                 if (res) {
                     const stringfyUser = JSON.stringify(res.user);
                     userLoggedIn(res.user.uid);
                     localStorage.setItem('userDeatailsObj' , stringfyUser)
-                    const userCollection = firebaseStore.collection("User").get()
+                    const userCollection = firebaseStore.collection("User")
+                    .get()
                         .then(function (querySnapshot) {
                             querySnapshot.forEach(function (doc) {
-                                if(doc.id=== res.user.uid){
-                                   history.replace('/feed');
-                                }
-                                else {
-                                    history.replace('/profile');
-                                }   
+                                userDocIds.push(doc.id);
                             });
+                            (userDocIds.indexOf(res.user.uid)) > -1 ? history.replace('/feed') : history.replace('/profile'); 
                         })
                         .catch(function (error) {
                             console.log("Error getting documents: ", error);

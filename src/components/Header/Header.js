@@ -20,6 +20,8 @@ const Header = ({ loggedInUser, history, userLoggedIn }) => {
     const logOutUser = () => {
         defaultAuth
             .signOut().then((res) => {
+                localStorage.removeItem('userDeatailsObj');
+                localStorage.removeItem('userProfile');
                 userLoggedIn('')
                 history.replace('/login');
             })
@@ -31,7 +33,7 @@ const Header = ({ loggedInUser, history, userLoggedIn }) => {
         <>
             <Link to='/find-friends' style={linkstyle}>Find friends</Link>
             <Link to='/profile' style={linkstyle}>Profile</Link>
-            <button onClick={(event) => logOutUser(event)} style={linkstyle}>Log Out</button>
+            <Link onClick={(event) => logOutUser(event)} style={linkstyle}>Log Out</Link>
         </>
     )
     return (<div className={classes.headerContainer}>

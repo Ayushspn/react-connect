@@ -2,4 +2,13 @@
 
 .postContainer{
     min-width : 45rem;
+    .postBtnGrp{
+        display : flex;
+        justify-content : flex-end;
+        margin-top: 20px;
+    }
+    .postBtn{
+        display: inline-block;
+        margin-right: 15px;
+    }
 }
